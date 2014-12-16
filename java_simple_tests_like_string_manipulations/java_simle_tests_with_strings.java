@@ -6,6 +6,9 @@ public class StringTester {
     }
     
     private static boolean acronims1(String arg1, String arg2){
+        if(arg1 == null || arg2 == null)
+            return false;
+            
         if(arg1.length() != arg2.length())
             return false;
             
