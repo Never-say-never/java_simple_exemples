@@ -6,7 +6,7 @@
     }
     
     // "apple" and "plaep" return true
-    private static boolean acronims1(String arg1, String arg2){
+    private static boolean acronyms1(String arg1, String arg2){
         if(arg1 == null || arg2 == null)
             return false;
             
@@ -31,6 +31,38 @@
         }
         
         return str2.length() == 0 && str1.length() == 0;
+    }
+    
+    private static boolean acronyms2(String arg1, String arg2){
+        if(arg1 == null)
+            return false;
+        
+        if(arg1.length() != arg2.length())
+            return false;
+        
+        if(arg1.equals(arg2)){
+            return true;
+        }
+        
+        char[] arr1 = arg1.toCharArray();
+        char[] arr2 = arg2.toCharArray();
+        
+        int counter = arr1.length;
+        for(int ix = 0; ix < arr1.length; ++ix){
+            for(int iy = 0; iy < arr2.length; ++iy){
+                if(arr2[iy] == ' ')
+                    continue;
+                
+                if(arr1[ix] == arr2[iy]){
+                    arr2[iy] = ' ';
+                    --counter;
+                    
+                    break;
+                }
+            }
+        }
+        
+        return counter == 0;
     }
     
     // "apple" return "elppa"
