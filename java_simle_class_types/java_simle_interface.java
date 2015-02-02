@@ -14,7 +14,7 @@ interface InterfaceExample3{
     
 }
 
-interface InterfaceExample2{
+interface InterfaceExample2 extends InterfaceExample3{
     
     public final int finalField = 1000;
     
