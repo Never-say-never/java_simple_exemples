@@ -5,6 +5,8 @@
 
   2. Any child class must either override the abstract 
   method or declare itself abstract.
+  
+  3. Abstract class can not be final
 */
 class NeedAbstract{
     
