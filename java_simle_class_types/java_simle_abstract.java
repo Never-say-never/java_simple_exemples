@@ -6,8 +6,17 @@
   2. Any child class must either override the abstract 
   method or declare itself abstract.
 */
+class NeedAbstract{
+    
+    private String msg;
+    
+    NeedAbstract(FierstAbstract f){
+        this.msg = f.publicFierst();
+        System.out.println(this.msg);
+    }
+}
 
-public class tesAbstract {
+public class testDecode {
     
     public static void main(String args[]){
         SuperClass supperClass = new SuperClass();
@@ -15,6 +24,16 @@ public class tesAbstract {
         
         FierstAbstract first   = new SuperClass();
         first.fierst();
+        
+        /* annonim inner class */
+        new NeedAbstract(new FierstAbstract(){
+
+            @Override
+            protected String publicFierst() {
+                return "from override";
+            }
+            
+        });
     }
 }
 
@@ -29,7 +48,7 @@ abstract class FierstAbstract /* extends OnlyOneExtention implements Inr1, Inr2 
     }
     
     /* can not be private */
-    abstract protected void publicFierst();
+    abstract protected String publicFierst();
     
 }
 
@@ -53,8 +72,9 @@ class SuperClass extends Second{
     }
 
     @Override
-    protected void publicFierst() {
+    protected String publicFierst() {
         System.out.println("SuperClass :publicFierst");
+        return null;
     }
     
 }
