@@ -15,6 +15,8 @@ interface InterfaceExample3{
     /* all field implicitly are static and final */
     /* static final */    String field3 = "InterfaceExample3";
     
+    public /* static */ final int finalField = 1001;
+    
     /* all methods implicitly are  public and abstract */
     /* public abstract */ void method();
     
@@ -44,6 +46,21 @@ class SimpleClass implements InterfaceExample1, InterfaceExample2{
     
     @Override
     public void method() {
-        
+        System.out.println("override method!");
     }
+}
+
+public class TestDecode{
+    
+    public static void main(String args[]){
+        SimpleClass simple = new SimpleClass();
+        simple.method();
+        //System.out.println(simple.finalField); ERROR
+        System.out.println(((InterfaceExample3) simple).finalField );
+        System.out.println( InterfaceExample2.finalField );
+        
+        ((InterfaceExample2) simple).defaultMethod("msg");
+        simple.defaultMethod("msg1");
+    }              
+    
 }
