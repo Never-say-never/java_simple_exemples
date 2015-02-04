@@ -7,6 +7,8 @@
   method or declare itself abstract.
   
   3. Abstract class can not be final
+  
+  4. Abstract class can contain main method
 */
 class NeedAbstract{
     
@@ -18,7 +20,7 @@ class NeedAbstract{
     }
 }
 
-public class testDecode {
+public /* abstract */ class testDecode {
     
     public static void main(String args[]){
         SuperClass supperClass = new SuperClass();
