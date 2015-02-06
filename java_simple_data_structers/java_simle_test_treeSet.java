@@ -22,10 +22,6 @@ public class testDecode{
         }
     }
     
-    public static void test(String g){
-        g = "new";
-    }
-    
 }
 
 class Has implements Comparable<Has>{
