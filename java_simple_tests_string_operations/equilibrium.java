@@ -20,4 +20,4 @@ private static int equilibrium(int[] A){
         }
         
         return -1;
-    }
+}
