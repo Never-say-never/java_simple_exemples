@@ -12,13 +12,13 @@ public class testDecode{
         }
         
         long left = 0;
-        for(int ix = 1; ix < length; ++ix){
-            left += A[ix - 1];
+        for(int ix = 0; ix < length; ++ix){
             long localRight = generallSumm - left - A[ix];
-            
-            if((localRight + left) == 0){
+            if(localRight == left){
                 return ix;
             }
+            
+            left += A[ix];
         }
         
         return -1;
