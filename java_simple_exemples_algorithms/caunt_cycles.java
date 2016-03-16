@@ -32,7 +32,7 @@ public class TestApp {
     //static private int[] b = {5,2,3,2,2,6,1,4};
     
     static private int[] a = {7,0,2,6,4,1,3,2};
-    static private int[] b = {6,0,5,3,0,5,3,4};
+    static private int[] b = {6,5,5,3,0,1,3,4};
     
     //static private int[] a;
     //static private int[] b;
@@ -80,14 +80,39 @@ class GraphDancer{
         int[][] map = new int[8][8];
         
         for(int ix = 0; ix < 7; ++ix){
-            map[A[ix]/* - 1*/][A[ix++ + 1] /*- 1*/] = 1;
+            map[ A[ix] ][ A[ix++ + 1] ] = 1;
         }
         
         for(int ix = 0; ix < 7; ++ix){
-            map[B[ix]/* - 1*/][B[ix++ + 1] /*- 1*/] = 1;
+            map[ B[ix] ][ B[ix++ + 1] ] = 1;
         }
         
         return map;
+    }
+    
+    private int[] quikSort(int[] arr){
+        int max = arr[arr.length - 1];
+        System.out.println("QuikSort max:" + max);
+        
+        int[] sortedArray = new int[arr.length - 1];
+        int index = 0;
+        
+        int test = 0;
+        for(int ix = max; ix > 1; --ix){
+            System.out.println("QuikSort serching for:" + ix);
+            for(int iy = 0; iy < arr.length - 1; ++iy){
+                if(arr[iy] == ix){
+                    // for excepting unprocessed elements
+                    sortedArray[index] = iy + 1;
+                    index++;   
+                }
+  
+                System.out.println("QuikSort iteration[" + ix + "," + iy + "]" + " = " + arr[iy]);
+                ++test;
+            }
+        }
+        System.out.println("QuikSort iterations:" + test);
+        return sortedArray;
     }
     
     /**
@@ -127,14 +152,26 @@ class GraphDancer{
         int[] nodeArray = this.findeRavels(map);
         System.out.println(Arrays.toString(nodeArray));
         
+        nodeArray = this.quikSort(nodeArray);
+        
+        System.out.println(Arrays.toString(nodeArray));
+        
         int[] result = null;
         
         this.show(map);
         
-        for(int ix = 0; ix < map.length; ++ix){
-            int[] rez = this.searchLight(result, map, ix, ix);
+        //for(int ix = 0; ix < map.length; ++ix){
+        for(int ix = 0; ix < nodeArray.length; ++ix){
+            if(nodeArray[ix] == 0){
+                continue;
+            }
+            int current = nodeArray[ix] - 1;
+            System.out.println("Start searching for node: " + current);
+            //int[] rez = this.searchLight(result, map, ix, ix);
+            int[] rez = this.searchLight(result, map, current, current);
             if(rez != null){
                 this.show(rez);
+                
                 int[] fArray = this.formatArray(rez);
                 
                 System.out.println(Arrays.toString(fArray));
@@ -156,8 +193,9 @@ class GraphDancer{
     private int[] searchLight(int[] result, int[][] map, int current, int target){
         for(int ix = 0; ix < map[current].length; ++ix){
 
+            // finish
             if(ix == target && map[current][ix] == 1){
-                System.out.println("Get cycle: " + ix + " -> " + current);
+                //System.out.println("Get cycle: " + ix + " -> " + current);
                 result = new int[map[current].length];
                 result[ix] = 1;
                 
@@ -165,7 +203,7 @@ class GraphDancer{
             }
             
             if(map[current][ix] == 1){
-                System.out.println("Recurs call: " + ix);
+                //System.out.println("Recurs call: " + ix);
                 
                 int[] tmp = this.searchLight(result, map, ix, target);
                 if(tmp != null){ 
