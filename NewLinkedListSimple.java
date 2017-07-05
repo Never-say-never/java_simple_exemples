@@ -16,6 +16,7 @@ public class TestCollection {
         list.add(2);
         list.add(3);
         list.add(4);
+        list.add(3);
         System.out.println(list.size());
         System.out.println(list);
         
@@ -65,9 +66,9 @@ class KillMePleaseList<T> {
             return deletedElements;
         }
         
-        Node currentHead = head;
+        Node currentHead = head.getNext();
         Node previewHead = currentHead;
-        while(currentHead.getNext() != null) {
+        while(currentHead != null) {
             if(currentHead.getData().equals(o)){
                 previewHead.setNext(currentHead.getNext());
                 
