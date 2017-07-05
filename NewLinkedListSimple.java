@@ -11,15 +11,15 @@ package com.nextclick.testcollection;
  */
 public class TestCollection {
     public static void main(String[] args) {
-        KillMePleaseList list = new KillMePleaseList();
-        list.add("one");
-        list.add("two");
-        list.add("three");
-        list.add("four");
+        KillMePleaseList<Integer> list = new KillMePleaseList();
+        list.add(1);
+        list.add(2);
+        list.add(3);
+        list.add(4);
         System.out.println(list.size());
         System.out.println(list);
         
-        list.removeElement("two");
+        list.removeElement(3);
         System.out.println(list);
         System.out.println(list.size());
         
@@ -28,9 +28,9 @@ public class TestCollection {
     }
 }
 
-class KillMePleaseList {
+class KillMePleaseList<T> {
     
-    private Node head;
+    private Node<T> head;
     
     private long size;
     
@@ -38,7 +38,7 @@ class KillMePleaseList {
      * 
      * @param obj 
      */
-    public void add(Object obj) {
+    public void add(T obj) {
         if(head == null) {
             head = new Node(obj);
         }
@@ -59,7 +59,7 @@ class KillMePleaseList {
      * @param o
      * @return integer count of elements that were deleted
      */
-    public long removeElement(Object o) {
+    public long removeElement(T o) {
         long deletedElements = 0;
         if(head == null || size == 0) {
             return deletedElements;
@@ -81,9 +81,9 @@ class KillMePleaseList {
         return deletedElements; 
     }
     
-    public Object get(int index) {
+    public T get(int index) {
         if(head == null) {
-            return head;
+            return null;
         }
         
         if(index > size || index < 0) {
@@ -101,7 +101,7 @@ class KillMePleaseList {
             currentHead = currentHead.getNext();
         }
         
-        return currentHead.getData();
+        return (T) currentHead.getData();
     }
     
     @Override
@@ -136,22 +136,22 @@ class KillMePleaseList {
         return size;
     }
     
-    private class Node {
+    private class Node<T> {
         
-        private Object data;
+        private T data;
         
         private Node next;
 
-        public Node(Object data) {
+        public Node(T data) {
             this.data = data;
             this.next = null;
         }
 
-        public Object getData() {
+        public T getData() {
             return data;
         }
 
-        public void setData(Object data) {
+        public void setData(T data) {
             this.data = data;
         }
 
