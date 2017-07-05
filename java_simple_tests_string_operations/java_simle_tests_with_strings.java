@@ -106,5 +106,25 @@
         
         return new String(rev);
     }
-    
+
+    public static String revs(String str) {
+        if(str == null || str.isEmpty() || str.length() == 1) {
+            return str;
+        }
+
+        char[] charArr = str.toCharArray();
+
+        int length = str.length();
+        int middle = length / 2;
+
+        for(int ix = 0; ix < middle; ++ix) {
+             char start = charArr[ix];
+             char end = charArr[length - 1 - ix];
+
+             charArr[ix] = end;
+             charArr[length - 1 - ix] = start;
+         }
+
+         return new String(charArr);
+    }
   }
